@@ -1,0 +1,17 @@
+composer create-project --prefer-dist laravel/laravel cronJobs
+php artisan make:command DemoCron --command=demo:cron
+open demo file then past this code - protected $signature = 'demo:cron';
+->everyMinute();	Run the task every minute
+
+app/Console/Kernel.php
+
+protected $commands = [
+        Commands\DemoCron::class,
+    ];
+
+protected function schedule(Schedule $schedule)
+    {
+        $schedule->command('demo:cron')
+                 ->everyMinute();
+    }
+php artisan schedule:run
